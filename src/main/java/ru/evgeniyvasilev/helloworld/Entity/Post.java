@@ -16,12 +16,14 @@ public class Post {
     @Column(name="likes")
     private int likes = 0;
 
-    public int like() {
-        return ++likes;
+    public Post like() {
+        ++likes;
+        return this;
     }
 
-    public void setTitle(String title) {
+    public Post setTitle(String title) {
         this.title = title;
+        return this;
     }
 
     public int unlike() throws Exception {
