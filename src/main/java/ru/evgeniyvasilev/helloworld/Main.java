@@ -78,7 +78,7 @@ public class Main {
             transaction.begin();
 
             // Get a List of Students
-            posts = manager.createQuery("SELECT s FROM Post s",
+            posts = manager.createQuery("SELECT s FROM Post s ORDER BY id",
                     Post.class).getResultList();
 
             // Commit the transaction
@@ -96,12 +96,17 @@ public class Main {
         return posts;
     }
 
+    public static Post getPost(int id) {
+        return manager.createQuery("SELECT s FROM Post s WHERE s.id = :id", Post.class).setParameter("id", id).getSingleResult();
+    }
+
     public static void main(String[] args) {
         try {
             manager = ENTITY_MANAGER_FACTORY.createEntityManager();
-            Post post = createPost("some post title");
-            post = createPost("some post title");
-            post = createPost("some post title");
+//            Post post = createPost("some post title");
+//            post = createPost("some post title");
+//            post = createPost("some post title");
+            Post post = getPost(1);
             likePost(post);
             likePost(post);
             likePost(post);
